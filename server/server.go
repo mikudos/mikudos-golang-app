@@ -20,7 +20,7 @@ type Struct struct {
 	MongoDB     *interfaces.IMongoDB
 	XormDB      *interfaces.IXorm
 	MysqlDB     *interfaces.IMysqlDB
-	Handlers    *interfaces.IHandler
+	Handler     *interfaces.IHandler
 }
 
 var debug = go_debugger.Debug("mikudos:server")
@@ -60,6 +60,6 @@ func (s *Struct) GetDB(dbType string) (interface{}, error) {
 
 // Configure Configure
 func (s *Struct) Configure(h *interfaces.IHandler) {
-	s.Handlers = h
+	s.Handler = h
 	(*h).ServerDecorater(s)
 }
