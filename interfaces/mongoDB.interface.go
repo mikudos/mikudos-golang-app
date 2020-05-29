@@ -4,9 +4,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// IDB IDB
-type IDB interface {
+// IMongoDB MongoDB interface
+type IMongoDB interface {
 	GetDB() *mongo.Database
 	GetClient() *mongo.Client
-	TestCollection() *mongo.Collection
+	GetCollection(collectionName string) *mongo.Collection
 }
