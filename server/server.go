@@ -17,27 +17,27 @@ type Struct struct {
 	CronJobs    map[cron.EntryID]string
 	OneTimeJobs map[cron.EntryID]string
 	SceneName   string
-	MongoDB     *interfaces.IMongoDB
-	XormDB      *interfaces.IXorm
-	MysqlDB     *interfaces.IMysqlDB
-	Handler     *interfaces.IHandler
+	MongoDB     interfaces.IMongoDB
+	XormDB      interfaces.IXorm
+	MysqlDB     interfaces.IMysqlDB
+	Handler     interfaces.IHandler
 }
 
 var debug = go_debugger.Debug("mikudos:server")
 
 // SetDB SetDB
 func (s *Struct) SetDB(db interface{}) error {
-	md, ok := db.(*interfaces.IMongoDB)
+	md, ok := db.(interfaces.IMongoDB)
 	if ok {
 		s.MongoDB = md
 		return nil
 	}
-	xd, ok := db.(*interfaces.IXorm)
+	xd, ok := db.(interfaces.IXorm)
 	if ok {
 		s.XormDB = xd
 		return nil
 	}
-	mysqld, ok := db.(*interfaces.IMysqlDB)
+	mysqld, ok := db.(interfaces.IMysqlDB)
 	if ok {
 		s.MysqlDB = mysqld
 		return nil
@@ -59,7 +59,7 @@ func (s *Struct) GetDB(dbType string) (interface{}, error) {
 }
 
 // Configure Configure
-func (s *Struct) Configure(h *interfaces.IHandler) {
+func (s *Struct) Configure(h interfaces.IHandler) {
 	s.Handler = h
-	(*h).ServerDecorater(s)
+	h.ServerDecorater(s)
 }

@@ -7,7 +7,7 @@ import (
 // IServer Server interface
 type IServer interface {
 	pb.GreeterServiceServer
-	Configure(*IHandler)
+	Configure(IHandler)
 	SetDB(interface{}) error
 	GetDB(dbType string) (interface{}, error)
 }
