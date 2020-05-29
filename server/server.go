@@ -61,5 +61,5 @@ func (s *Struct) GetDB(dbType string) (interface{}, error) {
 // Configure Configure
 func (s *Struct) Configure(h *interfaces.IHandler) {
 	s.Handlers = h
-	(*h).Configure(s)
+	(*h).ServerDecorater(s)
 }
